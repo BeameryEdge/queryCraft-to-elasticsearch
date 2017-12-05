@@ -21,7 +21,7 @@ npm install --save 'querycraft-to-elasticsearch'
 Suppose we have a collection of data that satisfies the interface
 
 ```ts
-interface contact {
+interface Contact {
     id: string
     'list': { id: string }[]
     firstName: string
@@ -48,13 +48,26 @@ We can build build it as easily as:-
 
 ```ts
 import { FilterBuilder, eq, lt, neq, any, find, where } from 'querycraft'
-import apply from 'querycraft-to-elasticsearch'
+import toElastic from 'querycraft-to-elasticsearch'
 
-const contacts: contact[] =  [ ... ]
+async function getContacts(filter: FilterBuilder){
+    const result = await client.search({
+        explain: true,
+        index: testIndexName,
+        body: toElastic(filter, fieldIdMapFn)
+    })
+
+    await client.indices.clearCache({
+        index: testIndexName,
+    })
+
+    return  result.hits.hits.map(prop('_source')) as Contact[]
+    // -> filtered list of contacts
+}
 
 const filter = new FilterBuilder()
 .where('firstName', eq('bob'))
-.where('list', find(where('id', eq('ite,1'))))
+.where('list', find(where('id', eq('item1'))))
 .where('lastName', any([
     eq('doyle'),
     eq(null)
@@ -65,7 +78,8 @@ const filter = new FilterBuilder()
 .setSortDirection('ASC')
 .setLimit(50)
 
-console.log(apply(filter, contacts))
+getContacts(filter)
+.then(console.log)
 // -> filtered list of contacts
 
 ```

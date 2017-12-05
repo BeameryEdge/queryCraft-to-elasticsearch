@@ -88,7 +88,7 @@ describe('toElastic',function(){
         return  result.hits.hits.map(prop('_source')) as Contact[]
     }
 
-    before('Connect to elasticseach client and set data',async function(){
+    before('Connect to elasticseach client and set data', async function(){
         this.timeout(60000)
         client = new Client({ host: 'http://localhost:9200/'})
 
