@@ -29,13 +29,14 @@
   },
   "homepage": "https://github.com/BeameryHQ/QueryCraft-To-Elasticsearch#readme",
   "devDependencies": {
-    "@types/chai": "^4.0.4",
+    "@types/chai": "^4.0.8",
     "@types/debug": "0.0.30",
-    "@types/elasticsearch": "^5.0.18",
+    "@types/elasticsearch": "^5.0.19",
     "@types/mocha": "^2.2.44",
     "@types/node": "^8.0.54",
     "@types/ramda": "^0.25.6",
     "chai": "^4.1.2",
+    "debug": "^3.1.0",
     "elasticsearch": "^14.0.0",
     "http-server": "^0.10.0",
     "install": "^0.10.1",
@@ -43,6 +44,9 @@
     "mocha-junit-reporter": "^1.15.0",
     "moment": "^2.19.3",
     "nyc": "^11.3.0",
+    "querycraft": "0.0.8",
+    "querycraft-to-function": "0.0.12",
+    "ramda": "^0.25.0",
     "source-map-support": "^0.5.0",
     "ts-node": "^3.3.0",
     "typescript": "^2.6.1"
@@ -66,8 +70,8 @@
     ],
     "all": true
   },
-  "dependencies": {
-    "querycraft": "0.0.8",
-    "querycraft-to-function": "0.0.1"
+  "dependencies": {},
+  "peerDependencies": {
+    "querycraft": "^0.0.8"
   }
 }

@@ -5,10 +5,10 @@ import { mergeDeep } from './util'
  * Converts an OrderCondition into an elsasticsearch range query
  * if you are working with days ago you flip the logic of lt/gt as gt
  * 3days ago is a date lower than the date 3 days ago
- * 
- * @param {OrderCondition} condition 
- * @param {string} rangeKey 
- * @returns 
+ *
+ * @param {OrderCondition} condition
+ * @param {string} rangeKey
+ * @returns
  */
 function getRangeQuery(condition: OrderCondition, rangeKey: string){
     const value =
@@ -21,10 +21,10 @@ function getRangeQuery(condition: OrderCondition, rangeKey: string){
 }
 /**
  * Convert a condition on a field to an ElasticSearch boolean query param
- * 
- * @param {string} fieldId 
- * @param {Condition} condition 
- * @returns {*} 
+ *
+ * @param {string} fieldId
+ * @param {Condition} condition
+ * @returns {*}
  */
 function conditionToBooleanQueryParam(fieldId: string, condition: Condition, fieldMapFn: (fieldId: string) => string): any {
     const mappedFieldId = fieldMapFn(fieldId) || fieldId
@@ -68,10 +68,10 @@ function conditionToBooleanQueryParam(fieldId: string, condition: Condition, fie
 
 /**
  * Convert a query object into an elsasticsearch query
- * 
+ *
  * @param {QueryBuilder} query
- * @param {*} [init] 
- * @returns {*} 
+ * @param {*} [init]
+ * @returns {*}
  */
 function queryAsElastic(query: QueryBuilder, fieldMapFn: (fieldId: string) => string, init?:any, prefix?: string): any {
     return {
@@ -82,10 +82,10 @@ function queryAsElastic(query: QueryBuilder, fieldMapFn: (fieldId: string) => st
 
 /**
  * Convert a Filter object into the body of an ElasticSearch query
- * 
+ *
  * @export
- * @param {FilterBuilder} filter 
- * @returns 
+ * @param {FilterBuilder} filter
+ * @returns
  */
 export default function toElastic(filter: FilterBuilder, maybeFieldMapFn?: (fieldId: string) => string){
     const fieldMapFn = maybeFieldMapFn || ($ => $)

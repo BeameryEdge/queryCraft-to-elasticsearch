@@ -68,7 +68,7 @@ describe('toElastic',function(){
         await client.indices.clearCache({
             index: testIndexName,
         })
-        
+
         debug('INFO', JSON.stringify(filter, null, 2))
 
         const body = filter ? toElastic(filter, fieldIdMapFn) : { query: { match_all: {} }}
@@ -109,7 +109,7 @@ describe('toElastic',function(){
                 }
             }
         }
-        
+
         await client.indices.putMapping({
             index: testIndexName,
             type: testContactsDocType,
@@ -438,7 +438,7 @@ describe('toElastic',function(){
         const hits = await makeQuery(filter)
         const expected = await testQuery(filter)
         assert.deepEqual(getIds(hits), getIds(expected))
-        
+
         const results: Contact[] = []
         let lastItem: any;
 
@@ -450,7 +450,7 @@ describe('toElastic',function(){
 
         const resultsAll = await makeQuery(filter.setLimit(limit*pages))
 
-        function getFieldValue(c: Contact) { 
+        function getFieldValue(c: Contact) {
             const cf = c.customFields.find($ => $.id === 'custom1') || { value: void 0 }
             return cf
         }
