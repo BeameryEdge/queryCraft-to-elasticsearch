@@ -46,6 +46,8 @@ jobs:
       - store_artifacts:
           path: coverage
           prefix: coverage
+      - store_test_results:
+          path: test-results.xml
       - run:
           name: Update codecov.io
           command: bash <(curl -s https://codecov.io/bash)
