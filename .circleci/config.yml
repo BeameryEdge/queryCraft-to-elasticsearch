@@ -40,7 +40,6 @@ jobs:
           environment:
             MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
             DEBUG: querycraft*
-
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
@@ -51,7 +50,7 @@ jobs:
           path: coverage
           prefix: coverage
       - store_test_results:
-          path: '.'
+          path: $CIRCLE_TEST_REPORTS/junit
       - run:
           name: Update codecov.io
           command: bash <(curl -s https://codecov.io/bash)
