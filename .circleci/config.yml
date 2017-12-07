@@ -36,12 +36,16 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Test
-          command: DEBUG=querycraft-to-elastic npm test || /bin/true
+          command: npm test || /bin/true
+          environment:
+            MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
+            DEBUG: querycraft*
+
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
-          path: test-results.xml
+          path: $CIRCLE_TEST_REPORTS/junit
           prefix: tests
       - store_artifacts:
           path: coverage
