@@ -11,7 +11,7 @@ import * as Debug from 'debug'
 
 const debug = Debug('querycraft-to-elastic')
 
-const testIndexName = 'misc-filter-builer:test'
+const testIndexName = 'querycraft-to-elastic-test-index'
 const testContactsDocType = 'contact'
 
 const wait = (delay: number) => new Promise(resolve => setTimeout(resolve, 1000))

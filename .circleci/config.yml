@@ -36,7 +36,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Test
-          command: npm test
+          command: DEBUG=* npm test
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
