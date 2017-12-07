@@ -1,6 +1,8 @@
 import { FilterBuilder, QueryBuilder, Condition, OrderCondition } from 'querycraft'
 import { mergeDeep } from './util'
 
+type ElasticsearchQuery = { filter: [ElasticsearchQuery] }
+
 /**
  * Converts an OrderCondition into an elsasticsearch range query
  * if you are working with days ago you flip the logic of lt/gt as gt
@@ -8,7 +10,7 @@ import { mergeDeep } from './util'
  *
  * @param {OrderCondition} condition
  * @param {string} rangeKey
- * @returns
+ * @returns {ElasticsearchQuery}
  */
 function getRangeQuery(condition: OrderCondition, rangeKey: string){
     const value =
@@ -45,11 +47,12 @@ function conditionToBooleanQueryParam(fieldId: string, condition: Condition, fie
                 .reduce((memo, condition) =>
                     mergeDeep(memo, conditionToBooleanQueryParam(mappedFieldId, condition, fieldMapFn)), {})
         case 'ANY':
-            return { filter: [{ dis_max: {
-                queries: (condition.value as Condition[])
-                    .map(condition => conditionToBooleanQueryParam(mappedFieldId, condition, fieldMapFn))
-                    .map(ESQuery => ESQuery.filter || [{ bool: ESQuery }])
-                    .reduce((m,$)=> m.concat($), [{}]) } }] }
+            const queryParams = (condition.value as Condition[])
+                .map(condition => conditionToBooleanQueryParam(mappedFieldId, condition, fieldMapFn))
+                .map(ESQuery => ESQuery.filter || [{ bool: ESQuery }])
+
+            return queryParams.length ? { filter: [{ dis_max: {
+                queries: queryParams.reduce((m,$)=> [...m, ...$]) } }] } : { filter: [] }
         case 'PREFIX':
             return { filter: [{ prefix: { [mappedFieldId]: condition.value } }] }
         case 'FIND':
