@@ -24,6 +24,11 @@ jobs:
     docker:
       - image: circleci/node:6.10.3
       - image: docker.elastic.co/elasticsearch/elasticsearch:6.0.1
+        environment:
+          - discovery.type=single-node
+        ports:
+          - 9200:9200
+          - 9300:9300
     working_directory: ~/repo
     steps:
       - checkout
