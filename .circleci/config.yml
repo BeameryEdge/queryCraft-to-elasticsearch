@@ -36,7 +36,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Test
-          command: DEBUG=querycraft-to-elastic npm test && /bin/true
+          command: DEBUG=querycraft-to-elastic npm test || /bin/true
       - run:
           name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
