@@ -451,7 +451,7 @@ describe('toElastic',function(){
         const resultsAll = await makeQuery(filter.setLimit(limit*pages))
 
         function getFieldValue(c: Contact) {
-            const cf = c.customFields.find($ => $.id === 'custom1') || { value: void 0 }
+            const cf = c.customFields.find($ => $.id === 'custom1') || { value: void 0 as any }
             return cf
         }
 

@@ -57,10 +57,6 @@ async function getContacts(filter: FilterBuilder){
         body: toElastic(filter, fieldIdMapFn)
     })
 
-    await client.indices.clearCache({
-        index: testIndexName,
-    })
-
     return  result.hits.hits.map(prop('_source')) as Contact[]
     // -> filtered list of contacts
 }

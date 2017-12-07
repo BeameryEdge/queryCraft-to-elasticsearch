@@ -12,9 +12,10 @@ import { mergeDeep } from './util'
  */
 function getRangeQuery(condition: OrderCondition, rangeKey: string){
     const value =
+        typeof condition.value === 'boolean' ||
         typeof condition.value === 'number' ||
-        condition.value instanceof Date ||
-        typeof condition.value === 'string' ?
+        typeof condition.value === 'string' ||
+        condition.value instanceof Date ?
             condition.value :
             `now-${condition.value.daysAgo}d/d`
     return { filter: [{ range: { [rangeKey]: { [condition.op.toLowerCase()]: value } } }] }
