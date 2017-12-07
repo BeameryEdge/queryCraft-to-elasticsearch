@@ -36,7 +36,7 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
           name: Test
-          command: npm test || /bin/true
+          command: npm test
           environment:
             MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml
             DEBUG: querycraft*
