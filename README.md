@@ -1,5 +1,5 @@
 # QueryCraft-To-Elasticsearch-To-Elasticsearch
-Converts a QueryCraft Filter Builder object into a function to filter arrays of objects.
+Converts a [QueryCraft](https://github.com/BeameryHQ/QueryCraft) Filter Builder object into a function to filter arrays of objects.
 
 
 [![NPM](https://nodei.co/npm/querycraft-to-elasticsearch.png)](https://npmjs.org/package/querycraft-to-elasticsearch)
