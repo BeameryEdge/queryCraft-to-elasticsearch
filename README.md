@@ -1,4 +1,4 @@
-# QueryCraft-To-Elasticsearch-To-Elasticsearch
+# QueryCraft-To-Elasticsearch
 Converts a [QueryCraft](https://github.com/BeameryHQ/QueryCraft) Filter Builder object into a function to filter arrays of objects.
 
 
