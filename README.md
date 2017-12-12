@@ -49,7 +49,10 @@ We can build build it as easily as:-
 ```ts
 import { FilterBuilder, eq, lt, neq, any, find, where } from 'querycraft'
 import toElastic from 'querycraft-to-elasticsearch'
+import { Client } from 'elasticsearch'
 
+const client = new Client({ host: 'http://localhost:9200/'})
+        
 async function getContacts(filter: FilterBuilder){
     const result = await client.search({
         explain: true,
