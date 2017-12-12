@@ -50,7 +50,6 @@ function conditionToBooleanQueryParam(fieldId: string, condition: Condition, fie
             const queryParams = (condition.value as Condition[])
                 .map(condition => conditionToBooleanQueryParam(mappedFieldId, condition, fieldMapFn))
                 .map(ESQuery => ESQuery.filter || [{ bool: ESQuery }])
-
             return queryParams.length ? { filter: [{ dis_max: {
                 queries: queryParams.reduce((m,$)=> [...m, ...$]) } }] } : { filter: [] }
         case 'PREFIX':
