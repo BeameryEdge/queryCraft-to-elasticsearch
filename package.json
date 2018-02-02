@@ -42,7 +42,7 @@
     "mocha-junit-reporter": "^1.15.0",
     "moment": "^2.19.3",
     "nyc": "^11.3.0",
-    "querycraft": "^0.0.17",
+    "querycraft": "^0.1.1",
     "querycraft-to-function": "^0.0.12",
     "ramda": "^0.25.0",
     "source-map-support": "^0.5.0",
@@ -70,6 +70,6 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "querycraft": "^0.0.8"
+    "querycraft": "^0.1.0"
   }
 }

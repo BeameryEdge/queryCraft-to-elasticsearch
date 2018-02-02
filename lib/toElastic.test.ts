@@ -1,7 +1,7 @@
 import "mocha"
 import { assert } from "chai"
 import apply from 'querycraft-to-function'
-import toElastic from '.'
+import toElastic from './toElastic'
 import {FilterBuilder, all, any, eq, find, gt, gte, lt, lte, neq, nfind, prefix, where} from 'querycraft'
 import { times, pluck, prop } from 'ramda'
 import * as moment from 'moment'
